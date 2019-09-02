@@ -25,9 +25,9 @@ namespace Bricks
         public int Score;
         public int bricksCleared;
 
-        private Texture2D imgBall;
-        private SpriteBatch spriteBatch;
-        private GameContent gameContent;
+        private readonly Texture2D imgBall;
+        private readonly SpriteBatch spriteBatch;
+        private readonly GameContent gameContent;
 
         public Ball(float screenWidth, float screenHeight,
             SpriteBatch spriteBatch, GameContent gameContent)

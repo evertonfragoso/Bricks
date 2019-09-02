@@ -15,8 +15,8 @@ namespace Bricks.GameObjects
         public bool Visible;
 
         private Color color;
-        private Texture2D imgBrick;
-        private SpriteBatch spriteBatch;
+        private readonly Texture2D imgBrick;
+        private readonly SpriteBatch spriteBatch;
 
         public Brick(float x, float y, Color color, SpriteBatch spriteBatch,
             GameContent gameContent)

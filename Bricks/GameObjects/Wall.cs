@@ -16,8 +16,8 @@ namespace Bricks.GameObjects
         public Wall(float x, float y, SpriteBatch spriteBatch, GameContent gameContent)
         {
             BrickWall = new Brick[7, 10];
-            float brickX = x;
-            float brickY = y;
+            float brickX;
+            float brickY;
             Color color = Color.White;
 
             for (int i = 0; i < 7; i++)

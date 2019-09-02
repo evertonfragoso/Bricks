@@ -12,8 +12,8 @@ namespace Bricks
         public float Width;
         public float Height;
 
-        private Texture2D imgPixel;
-        private SpriteBatch spriteBatch;
+        private readonly Texture2D imgPixel;
+        private readonly SpriteBatch spriteBatch;
 
         public GameBorder(float screenWidth, float screenHeight,
             SpriteBatch spriteBatch, GameContent gameContent)
