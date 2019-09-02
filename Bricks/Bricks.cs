@@ -4,6 +4,8 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
+using Bricks.GameObjects;
+
 namespace Bricks
 {
     public class Bricks : Game
@@ -12,9 +14,11 @@ namespace Bricks
         private SpriteBatch spriteBatch;
         private GameContent gameContent;
 
+        private GameBorder gameBorder;
         private Paddle paddle;
         private Wall wall;
 
+        private readonly DisplayMode display;
         private readonly int screenWidth;
         private readonly int screenHeight;
 
@@ -22,8 +26,9 @@ namespace Bricks
         {
             Content.RootDirectory = "Content";
 
-            screenWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
-            screenHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
+            display = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode;
+            screenWidth = display.Width;
+            screenHeight = display.Height;
 
             // set game to 502x700 or screen max if smaller
             if (screenWidth >= 502) screenWidth = 502;
@@ -52,8 +57,12 @@ namespace Bricks
             int paddleX = (screenWidth - gameContent.imgPaddle.Width) / 2;
             // paddle will be 100 pixels from the bottom of the screen
             int paddleY = screenHeight - 100;
+
+            gameBorder = new GameBorder(screenWidth, screenHeight, spriteBatch,
+                gameContent);
             // create the game paddle
-            paddle = new Paddle(paddleX, paddleY, screenWidth, spriteBatch, gameContent);
+            paddle = new Paddle(paddleX, paddleY, screenWidth, spriteBatch,
+                gameContent);
             wall = new Wall(1, 50, spriteBatch, gameContent);
 
             base.LoadContent();
@@ -66,7 +75,8 @@ namespace Bricks
 
         protected override void Update(GameTime gameTime)
         {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed ||
+                Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
             base.Update(gameTime);
@@ -78,6 +88,7 @@ namespace Bricks
 
             spriteBatch.Begin();
 
+            gameBorder.Draw();
             paddle.Draw();
             wall.Draw();
 

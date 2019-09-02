@@ -33,14 +33,18 @@
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="Bricks.cs" />
-    <Compile Include="Paddle.cs" />
     <Compile Include="GameContent.cs" />
-    <Compile Include="Brick.cs" />
-    <Compile Include="Wall.cs" />
+    <Compile Include="GameObjects\Brick.cs" />
+    <Compile Include="GameObjects\GameBorder.cs" />
+    <Compile Include="GameObjects\Paddle.cs" />
+    <Compile Include="GameObjects\Wall.cs" />
   </ItemGroup>
   <ItemGroup>
     <MonoGameContentReference Include="Content\Content.mgcb" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="GameObjects\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Content.Builder.targets" />

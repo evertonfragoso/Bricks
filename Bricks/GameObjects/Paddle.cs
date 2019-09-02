@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
-namespace Bricks
+namespace Bricks.GameObjects
 {
     class Paddle
     {
