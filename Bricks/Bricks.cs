@@ -13,24 +13,14 @@ namespace Bricks
         private GameContent gameContent;
 
         private Paddle paddle;
-        private int screenWidth = 0;
-        private int screenHeight = 0;
+        private Wall wall;
+
+        private readonly int screenWidth;
+        private readonly int screenHeight;
 
         public Bricks()
         {
-            graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
-        }
-
-        protected override void Initialize()
-        {
-            base.Initialize();
-        }
-
-        protected override void LoadContent()
-        {
-            spriteBatch = new SpriteBatch(GraphicsDevice);
-            gameContent = new GameContent(Content);
 
             screenWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
             screenHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
@@ -39,9 +29,24 @@ namespace Bricks
             if (screenWidth >= 502) screenWidth = 502;
             if (screenHeight >= 700) screenHeight = 700;
 
-            graphics.PreferredBackBufferWidth = screenWidth;
-            graphics.PreferredBackBufferHeight = screenHeight;
+            graphics = new GraphicsDeviceManager(this)
+            {
+                PreferredBackBufferWidth = screenWidth,
+                PreferredBackBufferHeight = screenHeight
+            };
+            graphics.ApplyChanges();
+        }
 
+        protected override void Initialize()
+        {
+            spriteBatch = new SpriteBatch(GraphicsDevice);
+            gameContent = new GameContent(Content);
+
+            base.Initialize();
+        }
+
+        protected override void LoadContent()
+        {
             // create game objects
             // we'll center the paddle on the screen to start
             int paddleX = (screenWidth - gameContent.imgPaddle.Width) / 2;
@@ -49,6 +54,7 @@ namespace Bricks
             int paddleY = screenHeight - 100;
             // create the game paddle
             paddle = new Paddle(paddleX, paddleY, screenWidth, spriteBatch, gameContent);
+            wall = new Wall(1, 50, spriteBatch, gameContent);
 
             base.LoadContent();
         }
@@ -73,6 +79,7 @@ namespace Bricks
             spriteBatch.Begin();
 
             paddle.Draw();
+            wall.Draw();
 
             spriteBatch.End();
 

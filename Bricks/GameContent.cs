@@ -37,7 +37,7 @@ namespace Bricks
             missSound = Content.Load<SoundEffect>("Sounds\\MissSound");
 
             // Load the font
-            labelFont = Content.Load<SpriteFont>("GraphicsAdapter\\Arial20");
+            labelFont = Content.Load<SpriteFont>("Graphics\\Arial20");
         }
     }
 }
