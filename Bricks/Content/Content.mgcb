@@ -13,6 +13,13 @@
 
 #---------------------------------- Content ---------------------------------#
 
+#begin Graphics/Arial20.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:Graphics/Arial20.spritefont
+
 #begin Graphics/ball.png
 /importer:TextureImporter
 /processor:TextureProcessor
