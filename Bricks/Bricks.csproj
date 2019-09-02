@@ -38,6 +38,7 @@
     <Compile Include="GameObjects\GameBorder.cs" />
     <Compile Include="GameObjects\Paddle.cs" />
     <Compile Include="GameObjects\Wall.cs" />
+    <Compile Include="GameObjects\Ball.cs" />
   </ItemGroup>
   <ItemGroup>
     <MonoGameContentReference Include="Content\Content.mgcb" />

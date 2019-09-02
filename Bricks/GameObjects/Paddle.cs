@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace Bricks.GameObjects
 {
-    class Paddle
+    public class Paddle
     {
         public Vector2 Position; // position of paddle on screen
         public float Width; // width of paddle
