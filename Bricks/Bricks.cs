@@ -21,6 +21,8 @@ namespace Bricks
         private readonly DisplayMode display;
         private readonly int screenWidth;
         private readonly int screenHeight;
+        private KeyboardState oldKeyboardState;
+        private MouseState oldMouseState;
 
         public Bricks()
         {
@@ -78,6 +80,22 @@ namespace Bricks
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed ||
                 Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
+
+            if (IsActive == false)
+                return;
+
+            KeyboardState newKeyboardState = Keyboard.GetState();
+            MouseState newMouseState = Mouse.GetState();
+
+            if (oldMouseState.X != newMouseState.X)
+                if (newMouseState.X >= 0 || newMouseState.X < screenWidth)
+                    paddle.MoveTo(newMouseState.X);
+
+            if (newKeyboardState.IsKeyDown(Keys.Left)) paddle.MoveLeft();
+            if (newKeyboardState.IsKeyDown(Keys.Right)) paddle.MoveRight();
+
+            oldMouseState = newMouseState;
+            oldKeyboardState = newKeyboardState;
 
             base.Update(gameTime);
         }
