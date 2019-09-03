@@ -76,9 +76,19 @@ namespace Bricks
                 0);
         }
 
+        public static void PlaySound(SoundEffect sound)
+        {
+            float volume = 1;
+            float pitch = 0.0f;
+            float pan = 0.0f;
+            sound.Play(volume, pitch, pan);
+        }
+
         public void Launch(float x, float y, float xVelocity, float yVelocity)
         {
             if (Visible) return;
+
+            PlaySound(gameContent.startSound);
 
             Visible = true;
             X = x;
@@ -99,21 +109,25 @@ namespace Bricks
             {
                 X = 1;
                 XVelocity *= -1;
+                PlaySound(gameContent.wallBounceSound);
             }
             if (X > ScreenWidth - Width + 5)
             {
                 X = ScreenWidth - Width + 5;
                 XVelocity *= -1;
+                PlaySound(gameContent.wallBounceSound);
             }
             if (Y < 1)
             {
                 Y = 1;
                 YVelocity *= -1;
+                PlaySound(gameContent.wallBounceSound);
             }
             if (Y + Height > ScreenHeight)
             {
                 Visible = false;
                 Y = 0;
+                PlaySound(gameContent.missSound);
                 return false;
             }
 
@@ -128,6 +142,8 @@ namespace Bricks
 
             if (HitTest(paddleRect, ballRect))
             {
+                PlaySound(gameContent.paddleBounceSound);
+
                 int offset = Convert.ToInt32(paddle.Width - (paddle.Position.X + paddle.Width - X + Width / 2)) / 5;
 
                 if (offset < 0) offset = 0;
@@ -198,6 +214,7 @@ namespace Bricks
 
                             if (HitTest(ballRect, brickRect))
                             {
+                                PlaySound(gameContent.brickSound);
                                 brick.Visible = false;
                                 Score = Score + 7 - i;
                                 YVelocity *= -1;

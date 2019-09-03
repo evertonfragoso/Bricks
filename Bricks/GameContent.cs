@@ -18,6 +18,7 @@ namespace Bricks
         public SoundEffect brickSound;
         public SoundEffect paddleBounceSound;
         public SoundEffect missSound;
+        public SoundEffect wallBounceSound;
 
         public SpriteFont labelFont;
 
@@ -35,6 +36,7 @@ namespace Bricks
             brickSound = Content.Load<SoundEffect>("Sounds\\BrickSound");
             paddleBounceSound = Content.Load<SoundEffect>("Sounds\\PaddleBounceSound");
             missSound = Content.Load<SoundEffect>("Sounds\\MissSound");
+            wallBounceSound = Content.Load<SoundEffect>("Sounds\\WallBounceSound");
 
             // Load the font
             labelFont = Content.Load<SpriteFont>("Graphics\\Arial20");
