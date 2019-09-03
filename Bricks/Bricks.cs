@@ -19,6 +19,8 @@ namespace Bricks
         private Paddle paddle;
         private Wall wall;
 
+        private Ball staticBall;
+
         private readonly DisplayMode display;
         private readonly int screenWidth;
         private readonly int screenHeight;
@@ -78,6 +80,14 @@ namespace Bricks
             // create wall
             wall = new Wall(1, 50, spriteBatch, gameContent);
 
+            // Show remaining balls
+            staticBall = new Ball(screenWidth, screenHeight, spriteBatch,
+                gameContent);
+            staticBall.X = 25;
+            staticBall.Y = 25;
+            staticBall.Visible = true;
+            staticBall.UseRotation = false;
+
             base.LoadContent();
         }
 
@@ -135,6 +145,8 @@ namespace Bricks
 
             spriteBatch.Begin();
 
+            // Draw game objects
+
             gameBorder.Draw();
             paddle.Draw();
             wall.Draw();
@@ -150,6 +162,44 @@ namespace Bricks
                     readyToServeBall = true;
                 }
             }
+
+            // Draw Lives and Score
+
+            staticBall.Draw();
+
+            string scoreMessage = "Score: " + ball.Score.ToString("00000");
+            Vector2 space = gameContent.labelFont.MeasureString(scoreMessage);
+            spriteBatch.DrawString(gameContent.labelFont, scoreMessage,
+                new Vector2((screenWidth - space.X) / 2, screenHeight - 40), Color.White);
+
+            if (ball.bricksCleared >= 70)
+            {
+                ball.Visible = false;
+                ball.bricksCleared = 0;
+                wall = new Wall(1, 50, spriteBatch, gameContent);
+                readyToServeBall = true;
+            }
+
+            if (readyToServeBall)
+            {
+                if (ballsRemaining > 0)
+                {
+                    string startMessage = "Press <Space> or Click Mouse to Start";
+                    Vector2 startSpace = gameContent.labelFont.MeasureString(startMessage);
+                    spriteBatch.DrawString(gameContent.labelFont, startMessage,
+                        new Vector2((screenWidth - startSpace.X) / 2, screenHeight / 2), Color.White);
+                }
+                else
+                {
+                    string endMessage = "Game Over";
+                    Vector2 endSpace = gameContent.labelFont.MeasureString(endMessage);
+                    spriteBatch.DrawString(gameContent.labelFont, endMessage,
+                        new Vector2((screenWidth - endSpace.X) / 2, screenHeight / 2), Color.White);
+                }
+            }
+
+            spriteBatch.DrawString(gameContent.labelFont, ballsRemaining.ToString(),
+                new Vector2(40, 10), Color.White);
 
             spriteBatch.End();
 
